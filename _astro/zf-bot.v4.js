@@ -4,34 +4,34 @@
   if (window.__zfq) return; window.__zfq = true;
 
 
-  var EMAIL = 'zaftrus@gmail.com', ENDPOINT = window.ZFQ_ENDPOINT || '/.netlify/functions/queries', STORE = 'zfq-history-v1', DEMO_INDEX = '/_astro/zf-bot-demo.v1.json';
+  var EMAIL = 'zaftrus@gmail.com', ENDPOINT = window.ZFQ_ENDPOINT || '/zaftrusweb/.netlify/functions/queries', STORE = 'zfq-history-v1', DEMO_INDEX = '/zaftrusweb/_astro/zf-bot-demo.v1.json';
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var $ = function (s, r) { return (r || document).querySelector(s); };
 
   var BOT_SVG = '<svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">' +
     '<defs>' +
-    '<radialGradient id="zq-body" cx="36%" cy="30%" r="85%"><stop offset="0" stop-color="#e6fcff"/><stop offset=".22" stop-color="#84dbf8"/><stop offset=".55" stop-color="#2aa9e6"/><stop offset="1" stop-color="#0e4672"/></radialGradient>' +
-    '<radialGradient id="zq-belly" cx="50%" cy="100%" r="62%"><stop offset="0" stop-color="#3fd9c9" stop-opacity=".8"/><stop offset="1" stop-color="#3fd9c9" stop-opacity="0"/></radialGradient>' +
-    '<linearGradient id="zq-rim" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6f6ff" stop-opacity=".95"/><stop offset=".55" stop-color="#b6f6ff" stop-opacity="0"/></linearGradient>' +
-    '<linearGradient id="zq-visor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1c2b"/><stop offset="1" stop-color="#03080d"/></linearGradient>' +
-    '<linearGradient id="zq-arm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fe3fa"/><stop offset="1" stop-color="#1b86c2"/></linearGradient>' +
-    '<radialGradient id="zq-halo"><stop offset="0" stop-color="#86f6e8" stop-opacity=".55"/><stop offset="1" stop-color="#86f6e8" stop-opacity="0"/></radialGradient>' +
-    '<clipPath id="zq-clip"><path d="M120 32C120 32 46 120 46 172C46 214 79 248 120 248C161 248 194 214 194 172C194 120 120 32 120 32Z"/></clipPath>' +
+    '<radialGradient id="zq-body" cx="36%" cy="30%" r="85%"><stop offset="0" stop-color="#e6fcff"/zaftrusweb/><stop offset=".22" stop-color="#84dbf8"/zaftrusweb/><stop offset=".55" stop-color="#2aa9e6"/zaftrusweb/><stop offset="1" stop-color="#0e4672"/zaftrusweb/></radialGradient>' +
+    '<radialGradient id="zq-belly" cx="50%" cy="100%" r="62%"><stop offset="0" stop-color="#3fd9c9" stop-opacity=".8"/zaftrusweb/><stop offset="1" stop-color="#3fd9c9" stop-opacity="0"/zaftrusweb/></radialGradient>' +
+    '<linearGradient id="zq-rim" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b6f6ff" stop-opacity=".95"/zaftrusweb/><stop offset=".55" stop-color="#b6f6ff" stop-opacity="0"/zaftrusweb/></linearGradient>' +
+    '<linearGradient id="zq-visor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1c2b"/zaftrusweb/><stop offset="1" stop-color="#03080d"/zaftrusweb/></linearGradient>' +
+    '<linearGradient id="zq-arm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8fe3fa"/zaftrusweb/><stop offset="1" stop-color="#1b86c2"/zaftrusweb/></linearGradient>' +
+    '<radialGradient id="zq-halo"><stop offset="0" stop-color="#86f6e8" stop-opacity=".55"/zaftrusweb/><stop offset="1" stop-color="#86f6e8" stop-opacity="0"/zaftrusweb/></radialGradient>' +
+    '<clipPath id="zq-clip"><path d="M120 32C120 32 46 120 46 172C46 214 79 248 120 248C161 248 194 214 194 172C194 120 120 32 120 32Z"/zaftrusweb/></clipPath>' +
     '</defs>' +
-    '<g class="zq-arm-l"><ellipse cx="42" cy="178" rx="11" ry="20" transform="rotate(20 42 178)" fill="url(#zq-arm)"/></g>' +
-    '<g class="zq-arm-r"><ellipse cx="198" cy="178" rx="11" ry="20" transform="rotate(-20 198 178)" fill="url(#zq-arm)"/></g>' +
-    '<path d="M120 32C120 32 46 120 46 172C46 214 79 248 120 248C161 248 194 214 194 172C194 120 120 32 120 32Z" fill="url(#zq-body)" stroke="url(#zq-rim)" stroke-width="2.4"/>' +
-    '<g clip-path="url(#zq-clip)"><rect x="40" y="150" width="160" height="110" fill="url(#zq-belly)"/></g>' +
-    '<path d="M76 152C77 120 98 86 115 64C103 92 97 122 99 152C94 163 80 164 76 152Z" fill="#fff" opacity=".5"/>' +
-    '<ellipse cx="84" cy="188" rx="4.5" ry="9" transform="rotate(14 84 188)" fill="#fff" opacity=".32"/>' +
-    '<rect x="68" y="136" width="104" height="58" rx="29" fill="url(#zq-visor)" stroke="#9ff3ff" stroke-opacity=".38" stroke-width="1.6"/>' +
-    '<path d="M84 148q36-8 72 0" stroke="#fff" stroke-opacity=".13" stroke-width="3" fill="none" stroke-linecap="round"/>' +
-    '<g class="zq-eyes"><ellipse cx="101" cy="163" rx="18" ry="21" fill="url(#zq-halo)"/><ellipse cx="139" cy="163" rx="18" ry="21" fill="url(#zq-halo)"/><ellipse class="zq-eye" cx="101" cy="163" rx="8.5" ry="11.5" fill="#86f6e8"/><ellipse class="zq-eye" cx="139" cy="163" rx="8.5" ry="11.5" fill="#86f6e8"/>' +
-    '<circle cx="98" cy="158" r="2.6" fill="#fff" opacity=".9"/><circle cx="136" cy="158" r="2.6" fill="#fff" opacity=".9"/></g>' +
-    '<path class="zq-mouth" d="M109 183q11 8 22 0" stroke="#86f6e8" stroke-width="3" fill="none" stroke-linecap="round"/>' +
-    '<circle cx="120" cy="222" r="12.5" fill="#06121c" fill-opacity=".55" stroke="#bff7ff" stroke-opacity=".55"/>' +
-    '<path d="M114 217h12l-12 10h12" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
-    '<g class="zq-orb"><circle cx="120" cy="30" r="17" fill="url(#zq-halo)"/><circle cx="120" cy="30" r="5.2" fill="#fff"/></g>' +
+    '<g class="zq-arm-l"><ellipse cx="42" cy="178" rx="11" ry="20" transform="rotate(20 42 178)" fill="url(#zq-arm)"/zaftrusweb/></g>' +
+    '<g class="zq-arm-r"><ellipse cx="198" cy="178" rx="11" ry="20" transform="rotate(-20 198 178)" fill="url(#zq-arm)"/zaftrusweb/></g>' +
+    '<path d="M120 32C120 32 46 120 46 172C46 214 79 248 120 248C161 248 194 214 194 172C194 120 120 32 120 32Z" fill="url(#zq-body)" stroke="url(#zq-rim)" stroke-width="2.4"/zaftrusweb/>' +
+    '<g clip-path="url(#zq-clip)"><rect x="40" y="150" width="160" height="110" fill="url(#zq-belly)"/zaftrusweb/></g>' +
+    '<path d="M76 152C77 120 98 86 115 64C103 92 97 122 99 152C94 163 80 164 76 152Z" fill="#fff" opacity=".5"/zaftrusweb/>' +
+    '<ellipse cx="84" cy="188" rx="4.5" ry="9" transform="rotate(14 84 188)" fill="#fff" opacity=".32"/zaftrusweb/>' +
+    '<rect x="68" y="136" width="104" height="58" rx="29" fill="url(#zq-visor)" stroke="#9ff3ff" stroke-opacity=".38" stroke-width="1.6"/zaftrusweb/>' +
+    '<path d="M84 148q36-8 72 0" stroke="#fff" stroke-opacity=".13" stroke-width="3" fill="none" stroke-linecap="round"/zaftrusweb/>' +
+    '<g class="zq-eyes"><ellipse cx="101" cy="163" rx="18" ry="21" fill="url(#zq-halo)"/zaftrusweb/><ellipse cx="139" cy="163" rx="18" ry="21" fill="url(#zq-halo)"/zaftrusweb/><ellipse class="zq-eye" cx="101" cy="163" rx="8.5" ry="11.5" fill="#86f6e8"/zaftrusweb/><ellipse class="zq-eye" cx="139" cy="163" rx="8.5" ry="11.5" fill="#86f6e8"/zaftrusweb/>' +
+    '<circle cx="98" cy="158" r="2.6" fill="#fff" opacity=".9"/zaftrusweb/><circle cx="136" cy="158" r="2.6" fill="#fff" opacity=".9"/zaftrusweb/></g>' +
+    '<path class="zq-mouth" d="M109 183q11 8 22 0" stroke="#86f6e8" stroke-width="3" fill="none" stroke-linecap="round"/zaftrusweb/>' +
+    '<circle cx="120" cy="222" r="12.5" fill="#06121c" fill-opacity=".55" stroke="#bff7ff" stroke-opacity=".55"/zaftrusweb/>' +
+    '<path d="M114 217h12l-12 10h12" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/zaftrusweb/>' +
+    '<g class="zq-orb"><circle cx="120" cy="30" r="17" fill="url(#zq-halo)"/zaftrusweb/><circle cx="120" cy="30" r="5.2" fill="#fff"/zaftrusweb/></g>' +
     '</svg>';
 
   var QUICK = ['What is AEGIS NEXA?', 'How does AENXIC work?', 'What is JARVIS?', 'I\'m a researcher', 'Partnerships & pilots'];
@@ -40,26 +40,26 @@
   var stillT, root, els = {}, built = false, isOpen = false, busy = false, opener = null, history = [], flight = null, raf = 0, pt = null;
 
   /* ------------------------------ text rendering ------------------------------ */
-  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function esc(s) { return s.replace(/zaftrusweb/&/g, '&amp;').replace(/zaftrusweb/</g, '&lt;').replace(/zaftrusweb/>/g, '&gt;'); }
   function inline(raw) {
     var keep = [], s = esc(raw);
     function hold(h) { keep.push(h); return '\u0000' + (keep.length - 1) + '\u0000'; }
-    s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*|mailto:[^\s)]+)\)/g, function (m, t, u) {
-      return hold('<a href="' + u + '"' + (/^https?:/.test(u) ? ' target="_blank" rel="noopener"' : '') + '>' + t + '</a>');
+    s = s.replace(/zaftrusweb/\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*|mailto:[^\s)]+)\)/g, function (m, t, u) {
+      return hold('<a href="' + u + '"' + (/zaftrusweb/^https?:/.test(u) ? ' target="_blank" rel="noopener"' : '') + '>' + t + '</a>');
     });
-    s = s.replace(/`([^`]+)`/g, function (m, c) { return hold('<code>' + c + '</code>'); });
-    s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    s = s.replace(/(^|[\s(])(https?:\/\/[^\s<)]+[^\s<).,;:!?])/g, function (m, p, u) { return p + hold('<a href="' + u + '" target="_blank" rel="noopener">' + u + '</a>'); });
-    s = s.replace(/([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g, function (m, e) { return hold('<a href="mailto:' + e + '">' + e + '</a>'); });
-    s = s.replace(/(^|[\s(])(\/(?:technology|aegis-nexa|aenxic|jarvis|research|company|team|ecosystem|contact|events)\/)/g, function (m, p, u) { return p + hold('<a href="' + u + '">' + u + '</a>'); });
-    return s.replace(/\u0000(\d+)\u0000/g, function (m, i) { return keep[+i]; });
+    s = s.replace(/zaftrusweb/`([^`]+)`/zaftrusweb/g, function (m, c) { return hold('<code>' + c + '</code>'); });
+    s = s.replace(/zaftrusweb/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/zaftrusweb/(^|[\s(])(https?:\/\/[^\s<)]+[^\s<).,;:!?])/g, function (m, p, u) { return p + hold('<a href="' + u + '" target="_blank" rel="noopener">' + u + '</a>'); });
+    s = s.replace(/zaftrusweb/([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})/g, function (m, e) { return hold('<a href="mailto:' + e + '">' + e + '</a>'); });
+    s = s.replace(/zaftrusweb/(^|[\s(])(\/(?:technology|aegis-nexa|aenxic|jarvis|research|company|team|ecosystem|contact|events)\/)/g, function (m, p, u) { return p + hold('<a href="' + u + '">' + u + '</a>'); });
+    return s.replace(/zaftrusweb/\u0000(\d+)\u0000/g, function (m, i) { return keep[+i]; });
   }
   function render(text) {
     var out = [], list = null, para = [];
     function endPara() { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } }
     function endList() { if (list) { out.push('</' + list + '>'); list = null; } }
-    String(text).replace(/\r/g, '').split('\n').forEach(function (line) {
-      var b = line.match(/^\s*(?:[-*•])\s+(.*)$/), n = line.match(/^\s*\d+[.)]\s+(.*)$/), h = line.match(/^\s*#{1,4}\s+(.*)$/);
+    String(text).replace(/zaftrusweb/\r/g, '').split('\n').forEach(function (line) {
+      var b = line.match(/zaftrusweb/^\s*(?:[-*•])\s+(.*)$/), n = line.match(/zaftrusweb/^\s*\d+[.)]\s+(.*)$/), h = line.match(/zaftrusweb/^\s*#{1,4}\s+(.*)$/);
       if (b || n) { endPara(); var t = b ? 'ul' : 'ol'; if (list !== t) { endList(); out.push('<' + t + '>'); list = t; } out.push('<li>' + inline((b || n)[1]) + '</li>'); }
       else if (h) { endPara(); endList(); out.push('<p><strong>' + inline(h[1]) + '</strong></p>'); }
       else if (!line.trim()) { endPara(); endList(); }
@@ -72,7 +72,7 @@
   /* ------------------------------ built-in test mode ------------------------------
      Used when no AI backend answers: matches the question against the website's own text. */
   var STOP = {}; 'a an the is are was were be been am do does did how what who whom whose which when where why can could would should will shall may might of in on at to for from by with about into as and or but if then than so that this those these it its you your we our us me my i tell give show please more any some there their they them have has had not no yes also very just'.split(' ').forEach(function (w) { STOP[w] = 1; });
-  function toks(str) { return (String(str).toLowerCase().match(/[a-z0-9]+/g) || []).filter(function (w) { return w.length > 1 && !STOP[w]; }).map(function (w) { return w.length > 3 ? w.replace(/(ing|ed|es|s)$/, '') : w; }); }
+  function toks(str) { return (String(str).toLowerCase().match(/zaftrusweb/[a-z0-9]+/g) || []).filter(function (w) { return w.length > 1 && !STOP[w]; }).map(function (w) { return w.length > 3 ? w.replace(/zaftrusweb/(ing|ed|es|s)$/, '') : w; }); }
   var demoData = null, demoLoading = null;
   function loadDemo() {
     if (demoData) return Promise.resolve(demoData);
@@ -86,9 +86,9 @@
   function snippet(c) { return '**' + c.h + '**' + (c.p && c.p !== c.h ? ' (' + c.p + ')' : '') + '\n\n' + c.t + '\n\nMore: ' + c.u; }
   function demoAnswer(q) {
     var t = q.toLowerCase();
-    if (/^\s*(hi|hello|hey|namaste|salaam|good (morning|afternoon|evening))\b/.test(t) && t.length < 40) return 'Hello! Ask me about AEGIS NEXA, AENXIC, JARVIS, our research, or how to work with us.';
-    if (/\bthank/.test(t)) return 'You\'re welcome! Anything else you\'d like to know?';
-    if (/\b(price|pricing|cost|quote|buy|purchase|order|deliver|delivery|lead time|discount|budget|invoice)\b/.test(t)) return 'Pricing, quotes and delivery are handled personally by the team. Please email ' + EMAIL + ' with what you need and they will reply.';
+    if (/zaftrusweb/^\s*(hi|hello|hey|namaste|salaam|good (morning|afternoon|evening))\b/.test(t) && t.length < 40) return 'Hello! Ask me about AEGIS NEXA, AENXIC, JARVIS, our research, or how to work with us.';
+    if (/zaftrusweb/\bthank/.test(t)) return 'You\'re welcome! Anything else you\'d like to know?';
+    if (/zaftrusweb/\b(price|pricing|cost|quote|buy|purchase|order|deliver|delivery|lead time|discount|budget|invoice)\b/.test(t)) return 'Pricing, quotes and delivery are handled personally by the team. Please email ' + EMAIL + ' with what you need and they will reply.';
     return loadDemo().then(function (d) {
       var qt = toks(q); if (!qt.length || !d.rows.length) return null;
       var N = d.rows.length, scored = d.rows.map(function (c) {
@@ -99,7 +99,7 @@
       var top = scored[0];
       if (!top || top.s < 3 || top.cov < .34) return null;
       var out = snippet(top.c), second = scored.filter(function (x) { return x.c.u !== top.c.u && x.s >= top.s * .7 && x.cov >= .5; })[0];
-      if (second) out += '\n\nAlso relevant: **' + second.c.h + '**: ' + second.c.t.slice(0, 220).replace(/\s+\S*$/, '') + '… ' + second.c.u;
+      if (second) out += '\n\nAlso relevant: **' + second.c.h + '**: ' + second.c.t.slice(0, 220).replace(/zaftrusweb/\s+\S*$/, '') + '… ' + second.c.u;
       return out;
     });
   }
@@ -121,11 +121,11 @@
         '</div>' +
         '<section class="zfq__panel" role="dialog" aria-modal="true" aria-labelledby="zfq-title" data-lenis-prevent>' +
           '<header class="zfq__head"><div><h2 class="zfq__title" id="zfq-title">Queries</h2><p class="zfq__sub">Ask about Zaftrus, our technology and research</p></div>' +
-            '<button type="button" class="zfq__x" aria-label="Close queries" data-zfq-close><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg></button></header>' +
+            '<button type="button" class="zfq__x" aria-label="Close queries" data-zfq-close><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/zaftrusweb/></svg></button></header>' +
           '<div class="zfq__log" role="log" aria-live="polite" aria-relevant="additions" data-lenis-prevent></div>' +
           '<div class="zfq__chips"></div>' +
           '<form class="zfq__form" autocomplete="off"><textarea class="zfq__in" rows="1" maxlength="1200" placeholder="Type your question…" aria-label="Your question"></textarea>' +
-            '<button type="submit" class="zfq__send" aria-label="Send"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h12M10 4l5 5-5 5"/></svg></button></form>' +
+            '<button type="submit" class="zfq__send" aria-label="Send"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h12M10 4l5 5-5 5"/zaftrusweb/></svg></button></form>' +
           '<p class="zfq__fine">AI assistant. Answers come from this website and Zaftrus documents. Anything else: <a href="mailto:' + EMAIL + '">' + EMAIL + '</a></p>' +
         '</section>' +
       '</div>';

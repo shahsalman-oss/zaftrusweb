@@ -16,14 +16,14 @@ const MIME = { '.html':'text/html; charset=utf-8', '.css':'text/css', '.js':'tex
 
 http.createServer((req, res) => {
   const u = new URL(req.url, 'http://localhost');
-  if (u.pathname === '/.netlify/functions/queries') {
+  if (u.pathname === '/zaftrusweb/.netlify/functions/queries') {
     let body = ''; req.on('data', c => body += c);
     req.on('end', async () => {
       const r = await fn.handler({ httpMethod: req.method, headers: req.headers, body, queryStringParameters: Object.fromEntries(u.searchParams) });
       res.writeHead(r.statusCode, r.headers); res.end(r.body);
     }); return;
   }
-  if (/^\/(knowledge|netlify|tools)(\/|$)/.test(u.pathname)) { res.writeHead(404); res.end('Not found'); return; }
+  if (/zaftrusweb/^\/(knowledge|netlify|tools)(\/|$)/.test(u.pathname)) { res.writeHead(404); res.end('Not found'); return; }
   let p = path.join(ROOT, decodeURIComponent(u.pathname));
   if (!p.startsWith(ROOT)) { res.writeHead(403); res.end(); return; }
   if (fs.existsSync(p) && fs.statSync(p).isDirectory()) p = path.join(p, 'index.html');

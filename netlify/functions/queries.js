@@ -34,23 +34,23 @@ function siteRoot() {
 }
 
 function decodeEntities(s) {
-  return s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&rarr;/g, '→')
-    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
-    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)));
+  return s.replace(/zaftrusweb/&nbsp;/g, ' ').replace(/zaftrusweb/&amp;/g, '&').replace(/zaftrusweb/&lt;/g, '<').replace(/zaftrusweb/&gt;/g, '>')
+    .replace(/zaftrusweb/&quot;/g, '"').replace(/zaftrusweb/&#39;|&apos;/g, "'").replace(/zaftrusweb/&rarr;/g, '→')
+    .replace(/zaftrusweb/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/zaftrusweb/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)));
 }
 function tidy(s) {
-  const lines = s.split('\n').map(l => l.replace(/[ \t]+/g, ' ').trim()).filter(Boolean);
+  const lines = s.split('\n').map(l => l.replace(/zaftrusweb/[ \t]+/g, ' ').trim()).filter(Boolean);
   const out = []; for (const l of lines) if (out[out.length - 1] !== l) out.push(l);
   return out.join('\n');
 }
 function htmlToText(html, keepChrome) {
-  let h = html.replace(/<(script|style|noscript|svg|canvas)[\s\S]*?<\/\1>/gi, ' ');
-  const title = (h.match(/<title>([\s\S]*?)<\/title>/i) || [])[1] || '';
-  h = h.replace(/<head[\s\S]*?<\/head>/i, ' ');
-  if (!keepChrome) h = h.replace(/<(header|footer|nav)[\s\S]*?<\/\1>/gi, ' ');
-  h = h.replace(/<\/(p|div|li|h[1-6]|tr|section|details|summary|figcaption|dt|dd|caption|ul|ol|table)>/gi, '\n')
-       .replace(/<br\s*\/?>/gi, '\n').replace(/<\/(td|th)>/gi, ' | ').replace(/<[^>]+>/g, ' ');
+  let h = html.replace(/zaftrusweb/<(script|style|noscript|svg|canvas)[\s\S]*?<\/\1>/gi, ' ');
+  const title = (h.match(/zaftrusweb/<title>([\s\S]*?)<\/title>/i) || [])[1] || '';
+  h = h.replace(/zaftrusweb/<head[\s\S]*?<\/head>/i, ' ');
+  if (!keepChrome) h = h.replace(/zaftrusweb/<(header|footer|nav)[\s\S]*?<\/\1>/gi, ' ');
+  h = h.replace(/zaftrusweb/<\/(p|div|li|h[1-6]|tr|section|details|summary|figcaption|dt|dd|caption|ul|ol|table)>/gi, '\n')
+       .replace(/zaftrusweb/<br\s*\/?>/gi, '\n').replace(/zaftrusweb/<\/(td|th)>/gi, ' | ').replace(/zaftrusweb/<[^>]+>/g, ' ');
   return { title: decodeEntities(title).trim(), text: tidy(decodeEntities(h)) };
 }
 
@@ -79,8 +79,8 @@ function docxToText(buf) {
   const xml = zipEntry(buf, n => n === 'word/document.xml');
   if (!xml) return '';
   const s = xml.toString('utf8')
-    .replace(/<w:tab\/>/g, '\t').replace(/<w:br[^>]*\/>/g, '\n').replace(/<\/w:p>/g, '\n').replace(/<\/w:tc>/g, ' | ')
-    .replace(/<[^>]+>/g, '');
+    .replace(/zaftrusweb/<w:tab\/>/g, '\t').replace(/zaftrusweb/<w:br[^>]*\/>/g, '\n').replace(/zaftrusweb/<\/w:p>/g, '\n').replace(/zaftrusweb/<\/w:tc>/g, ' | ')
+    .replace(/zaftrusweb/<[^>]+>/g, '');
   return tidy(decodeEntities(s));
 }
 
@@ -107,7 +107,7 @@ function loadKnowledge() {
   for (const rel of pages) {
     try {
       const { title, text } = htmlToText(fs.readFileSync(path.join(root, rel), 'utf8'), false);
-      const url = '/' + rel.replace(/index\.html$/, '');
+      const url = '/zaftrusweb/' + rel.replace(/zaftrusweb/index\.html$/, '');
       if (text) kb.site.push({ url, title, text: text.slice(0, 60000) });
     } catch (e) {}
   }
