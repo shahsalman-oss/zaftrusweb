@@ -1,0 +1,59 @@
+/* Zaftrus UI layer: Orbitron, rounded buttons, glass header, interactivity */
+:root{--f-mono:"Orbitron","Eurostile","Bank Gothic",ui-sans-serif,system-ui,sans-serif;--f-orb:var(--f-mono);--pill:999px}
+
+/* ---- Orbitron everywhere the technical/mono face was used ---- */
+.mono,.label,.eyebrow,.tag,.btn,.link-arrow,.dim,.dim-tag,.title-block,.scene-hint,.note,.callout span,
+.graph-tag,.layer-tag,.orbit-tag span,.orbit-core,.skip-link,.hero__word,.hero__strip .x,.seg button,
+.legend dd,.matrix__val,.matrix__nil,.econ__plus,.calc input[type=number],.zf-table th,.zf-steps li:before,
+.zf-person .zf-mono,.hdr__nav a,.hdr__word,.mnav .mono,.zf-big,.metric__unit,.zf-timeline b,.zf-flow b,
+.zf-cells .label,[class*="__idx"],.idx,.eg__idx{font-family:var(--f-orb)!important}
+.mono,.label,.eyebrow,.tag,.btn,.link-arrow,.dim,.title-block,.scene-hint,.graph-tag,.layer-tag,.seg button,.hdr__nav a,.zf-table th{letter-spacing:.07em!important}
+.note{letter-spacing:.02em!important;font-size:11px}
+.hero__word{letter-spacing:.42em!important}
+.hdr__word{letter-spacing:.2em!important;font-weight:700!important;font-stretch:100%!important;font-size:15px}
+.hdr__nav a{font-size:11px!important;font-weight:500!important}
+.btn{font-weight:600}
+
+/* ---- Top bar: 70% transparent ---- */
+.hdr,.hdr.is-scrolled{
+  background:rgba(8,12,17,.3)!important;
+  -webkit-backdrop-filter:saturate(1.3) blur(12px)!important;backdrop-filter:saturate(1.3) blur(12px)!important;
+  border-bottom:1px solid rgba(234,240,246,.08)!important}
+.hdr__logo{object-fit:contain;filter:drop-shadow(0 0 10px #ff5a1f40);transition:transform .5s cubic-bezier(.2,.7,.1,1)}
+.hdr__brand:hover .hdr__logo{transform:rotate(-8deg) scale(1.08)}
+
+/* ---- Round-edged buttons ---- */
+.btn,.hdr__cta,.link-arrow.btn,button.btn,input[type=submit],.btn--ghost,.btn--light,.btn--night-ghost{border-radius:var(--pill)!important;overflow:hidden;position:relative;isolation:isolate}
+.btn{padding-inline:26px 24px}
+.hdr__cta{padding-inline:22px 20px}
+.hdr__toggle{border-radius:50%!important}
+.seg{border-radius:var(--pill)!important;overflow:hidden}
+.seg button{border-radius:var(--pill)!important}
+.tag{border-radius:var(--pill)!important}
+button:not(.hdr__toggle),[role=button],input[type=submit]{border-radius:var(--pill)}
+.calc input[type=number],.calc select,form input,form textarea,form select{border-radius:14px!important}
+.btn .rip{position:absolute;border-radius:50%;pointer-events:none;background:rgba(255,255,255,.35);transform:scale(0);animation:zf-rip .65s ease-out forwards;z-index:-1}
+@keyframes zf-rip{to{transform:scale(1);opacity:0}}
+
+/* ---- Interactivity ---- */
+#zf-progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--grad);z-index:300;pointer-events:none}
+#zf-glow{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle,rgba(42,169,230,.14),rgba(63,217,201,.05) 45%,transparent 70%);opacity:0;transition:opacity .4s;will-change:transform}
+#zf-glow.on{opacity:1}
+main,.hero,.section{position:relative;z-index:1}
+/* spotlight cards */
+.zf-spot{position:relative;translate:0 0;transition:translate .35s var(--ease,cubic-bezier(.2,.7,.1,1)),border-color .3s,box-shadow .35s}
+.zf-spot:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;z-index:0;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(42,169,230,.16),transparent 70%)}
+.zf-spot:hover{translate:0 -5px;box-shadow:0 18px 40px -22px rgba(42,169,230,.55);border-color:var(--accent)}
+.zf-spot:hover:before{opacity:1}
+.zf-spot>*{position:relative;z-index:1}
+.area,.zf-cells>*,.zf-three>div,.nm>div,.zf-person{border-radius:18px}
+.hdr__nav a{transition:color .2s,text-shadow .25s}
+.hdr__nav a:hover{text-shadow:0 0 14px rgba(42,169,230,.8)}
+a.link-arrow:hover{gap:14px}
+/* hero particle field */
+.zf-flow-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:crosshair}
+.hero__stage{pointer-events:none}
+@media(max-width:860px){#zf-glow{display:none}}
+@media(prefers-reduced-motion:reduce){.zf-spot,.zf-spot:hover{translate:none;transition:none}#zf-glow{display:none}}

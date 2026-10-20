@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://superlative-sfogliatella-cff9fb.netlify.app/sitemap-index.xml

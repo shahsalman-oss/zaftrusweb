@@ -1,0 +1,43 @@
+/* Zaftrus image heroes: photo bleeds in from the edge, dots repel the cursor, spotlight follows it */
+.zf-hero--img{position:relative;overflow:hidden;isolation:isolate}
+.zf-hero--img>.wrap{position:relative;z-index:2}
+.zfh{position:absolute;inset:0;z-index:0;pointer-events:none;--mx:-999px;--my:-999px;--dim:.5;--pos:50% 50%;--zoom:1}
+.zfh:after{content:"";position:absolute;left:0;right:0;bottom:0;height:min(220px,34%);background:linear-gradient(180deg,transparent,var(--paper,#080c11))}
+
+/* the photo: right-anchored, dissolving into the page on the left and bottom */
+.zfh__img{position:absolute;top:0;bottom:0;right:0;width:min(86%,1560px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.38) 20%,#000 56%),linear-gradient(180deg,#000 0%,#000 52%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.38) 20%,#000 56%),linear-gradient(180deg,#000 0%,#000 52%,transparent 100%);
+  mask-composite:intersect}
+.zfh__pan{position:absolute;inset:-5%;will-change:transform}
+.zfh__pan img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--pos);transform-origin:var(--pos);transform:scale(var(--zoom));display:block;
+  filter:saturate(.95) contrast(1.06) brightness(.92);animation:zfh-in 2.2s cubic-bezier(.2,.7,.1,1) both}
+.zfh[data-flip] .zfh__pan img{transform:scale(var(--zoom)) scaleX(-1)}
+@keyframes zfh-in{from{opacity:0;filter:saturate(.95) contrast(1.06) brightness(.5) blur(8px)}}
+
+/* cool tint to sit on the dark-blue palette, plus the cursor spotlight (dim everywhere except under the pointer) */
+.zfh__tint{position:absolute;inset:0;background:linear-gradient(115deg,#0a2a4066 0%,#2aa9e61a 100%);mix-blend-mode:multiply}
+.zfh__dim{position:absolute;inset:0;background:radial-gradient(circle 300px at var(--mx) var(--my),rgba(6,9,13,0) 0%,rgba(6,9,13,calc(var(--dim)*.35)) 55%,rgba(6,9,13,var(--dim)) 100%)}
+.zfh__glow{position:absolute;inset:0;background:radial-gradient(circle 220px at var(--mx) var(--my),rgba(63,217,201,.16),transparent 70%);mix-blend-mode:screen}
+
+/* the dot field (same physics as the homepage) */
+.zfh__fx{position:absolute;inset:0;width:100%;height:100%;display:block;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.55) 30%,#000 60%);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.55) 30%,#000 60%)}
+
+/* per-photo grading */
+.zfh[data-zfh=river] .zfh__pan img{filter:saturate(.95) contrast(1.06) brightness(.9)}
+.zfh[data-zfh=river] .zfh__tint{background:linear-gradient(115deg,#0a2a4099 0%,#1c6fa033 100%)}
+.zfh[data-zfh=river]{--dim:.48}
+.zfh[data-zfh=macro] .zfh__pan img{filter:saturate(1.05) contrast(1.05) brightness(1)}
+.zfh[data-zfh=lake] .zfh__pan img{filter:saturate(1) contrast(1.04) brightness(.95)}
+
+@media(max-width:860px){
+  .zfh{--dim:.3}
+  .zfh__img{width:100%;-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.7) 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.7) 55%,transparent 100%)}
+  .zfh__fx{-webkit-mask-image:none;mask-image:none;opacity:.8}
+}
+/* touch devices have no hover spotlight, so keep the photo brighter */
+@media(hover:none){.zfh{--dim:.22}.zfh[data-zfh=river]{--dim:.4}}
+@media(prefers-reduced-motion:reduce){.zfh__pan img{animation:none}}

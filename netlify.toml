@@ -1,0 +1,43 @@
+# Zaftrus site — Netlify configuration
+# Deploy this folder as-is (drag-and-drop, or `npx netlify deploy --prod`).
+
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  # Everything the assistant is allowed to read. Drop verification documents in /knowledge.
+  included_files = ["knowledge/**", "index.html", "*/index.html"]
+
+# Never serve the knowledge documents or function source as public files.
+[[redirects]]
+  from = "/knowledge/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# Friendly alias for the assistant endpoint
+[[redirects]]
+  from = "/api/queries"
+  to = "/.netlify/functions/queries"
+  status = 200
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[build.environment]
+  NODE_VERSION = "22"

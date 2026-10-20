@@ -1,0 +1,34 @@
+/* Zaftrus theme layer: cool dark palette, seamless transitions */
+:root{--paper:#080c11;--paper-2:#0d141b;--paper-3:#131c25;--white:#0f1720;--ink:#eaf0f6;--ink-2:#eaf0f6cc;--mute:#eaf0f68f;--mute-2:#eaf0f66b;--line:#eaf0f61a;--line-2:#eaf0f62e;--line-3:#eaf0f55c;--accent:#2aa9e6;--accent-ink:#5cc8f5;--accent-soft:#2aa9e61f;--night:#06090d;--night-2:#0d141b;--night-line:#eaf0f61f;--grad:linear-gradient(115deg,#2aa9e6 0%,#3fd9c9 100%);color-scheme:dark}
+html{background:#080c11;scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:linear-gradient(180deg,#080c11 0%,#0a121a 40%,#080c11 100%) fixed}
+::selection{background:#2aa9e6;color:#04121b}
+.btn:not(.btn--ghost){background:var(--grad);color:#04121b;border-color:transparent}
+.night,.section.night{background:transparent!important}
+.cta,.ftr{background:radial-gradient(900px 420px at 85% -10%,#2aa9e626,transparent 60%),transparent}
+.ftr{border-top:1px solid var(--line-2)}
+.ftr .ftr__word[data-astro-cid-jo6i4kqk]{font-size:clamp(48px,14.6vw,232px)}
+.hdr{background:linear-gradient(180deg,#080c11cc,#080c1100)}
+.hdr.is-scrolled{background:#080c11d9;backdrop-filter:blur(14px)}
+/* seamless page-to-page transitions */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:zf-out .28s var(--ease) both}
+::view-transition-new(root){animation:zf-in .5s var(--ease) both}
+.hdr{view-transition-name:zf-hdr}
+@keyframes zf-out{to{opacity:0;transform:translateY(-6px)}}
+@keyframes zf-in{from{opacity:0;transform:translateY(10px)}}
+@media(prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
+/* sections blend instead of cutting */
+.zf-band{background:transparent;position:relative}
+.zf-band--lift{background:linear-gradient(180deg,transparent 0%,#2aa9e60d 50%,transparent 100%)}
+.zf-hero{position:relative;overflow:hidden;background:radial-gradient(900px 520px at 88% 8%,#2aa9e629,transparent 62%),transparent}
+.zf-hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(180deg,transparent,var(--paper));pointer-events:none}
+/* home follower canvas */
+body.zf-home .section,body.zf-home .hero{background:transparent}
+
+/* night sections: text must be light now that --paper is dark */
+.night,.section.night,.cta,.ftr{color:var(--ink)}
+.night{--ink:#eaf0f6;--ink-2:#eaf0f6cc;--mute:#eaf0f68f}
+.eg[data-astro-cid-awiqf4mw],.night .eyebrow,.calc input[type=number]{color:var(--ink)}
+.calc .corner{border-color:var(--ink)}
